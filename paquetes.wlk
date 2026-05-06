@@ -9,7 +9,7 @@ object paquete {
     
 
     method puedeEntregarsePor(unMensajero){
-        return  unMensajero.puedeEntregarEn(destino)
+        return  unMensajero.puedeEntregarEn(destino) && estaPago
     }
 
     method registrarPago(){
@@ -29,8 +29,8 @@ object paquete {
 object paquetito {
         var property destino = puenteDeBrooklyn
 
-        method puedeEntregarsePor(unMensajero){
-            return  destino.dejaPasar(unMensajero)
+    method puedeEntregarsePor(unMensajero){
+        return  unMensajero.puedeEntregarEn(destino) && self.estaPago()
     }
 
     method precio(){
@@ -43,7 +43,15 @@ object paquetito {
 }
 
 object paqueton{
-    const destinos= #{}
+    const destinos = #{matrix, puenteDeBrooklyn} //conjunto:no hay orden y no hay repetidos
+
+    method obtenerDestinos() = destinos
+
+    method cantidadDeDestinos(){
+        return destinos.size()
+    }
+
+
     var valorPagado =  0
 
     method precio(){
@@ -56,10 +64,8 @@ object paqueton{
     }
     method estaPago() {
         valorPagado == self.precio()
+        return true
     
-    }
-    method puedeEntregarsePor(unMensajero){
-            return  destinos.dejaPasar(unMensajero)
     }
 }
 

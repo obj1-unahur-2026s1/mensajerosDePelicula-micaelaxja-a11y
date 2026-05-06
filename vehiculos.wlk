@@ -2,7 +2,9 @@ import mensajeros.*
 import destinos.*
 
 object  bicicleta {
-    method peso() = 5
+    method peso() {
+        return 5
+    } 
 
 }
 
@@ -22,10 +24,12 @@ object  camion {
         return cantidadAcoplados
 
     }
-    method pesoCamionSinAcoplado() {
+    method peso() {
         return peso
-      
+    
     }
-
 }
+
+
+
 

@@ -20,8 +20,11 @@ object roberto { //polimorfismo ->puedeLlamar() && pesoTotal()
         return peso
     }
 
-    method puedeEntregarEn(unDestino) {
-        return unDestino.dejaPasar(self) && paquete.estaPago()
+    method puedePasarPorTodosLosDestinos(unDestino){
+        return unDestino.dejaPasar(self)
+    }
+    method puedeEntregar(unPaquete){
+        return paquete.estaPago()
     }
 
     method puedeLlamar(){ //no puede llamar a nadie
@@ -32,7 +35,7 @@ object roberto { //polimorfismo ->puedeLlamar() && pesoTotal()
 
 object chuckNorris { //polimorfismo ->puedeLlamar() && pesoTotal()
 
-
+    var property vehiculo = bicicleta
     var property peso = 80  //atributo propio de chuck
 
     method peso(){  //
@@ -43,14 +46,19 @@ object chuckNorris { //polimorfismo ->puedeLlamar() && pesoTotal()
         return true
     
     }
-    method puedeEntregarEn(unDestino) {
-        return unDestino.dejaPasar(self) && paquete.estaPago()
+    method puedePasarPorTodosLosDestinos(unDestino){
+        return unDestino.dejaPasar(self)
     }
+    method puedeEntregar(unPaquete){
+        return paquete.estaPago()
+    }
+
 
 }
 
 object neo{  //polimorfismo ->puedeLlamar() && pesoTotal()
 
+    var property vehiculo = bicicleta
 
     method peso(){
         return 0
@@ -62,8 +70,12 @@ object neo{  //polimorfismo ->puedeLlamar() && pesoTotal()
 
 
 
-    method puedeEntregarEn(unDestino) {
-        return unDestino.dejaPasar(self) && paquete.estaPago()
+    method puedePasarPorTodosLosDestinos(destino){
+        return destino.dejaPasar(self)
+    }
+
+    method puedeEntregar(unPaquete){
+        return paquete.estaPago()
     }
 
 }

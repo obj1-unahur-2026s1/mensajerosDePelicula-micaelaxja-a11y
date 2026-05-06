@@ -1,0 +1,44 @@
+import empresa.*
+import destinos.*
+import mensajeros.*
+import paquetes.*
+import vehiculos.*
+
+describe "Voy a tester individualmente los metodos del objeto MENSAJERIA" {
+    test "Contratar un mensajero" {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    assert.equals(1, mensajeria.obtenerMensajeros().size())
+    }
+
+    test "Despedir a un mensajero"{
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.despedirUnMensajero(neo)
+    assert.equals(0, mensajeria.obtenerMensajeros().size())
+    }
+    test "esGrande()" {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(roberto)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    assert.that(mensajeria.esGrande())
+    
+    }
+
+    test "Primer Empleado" {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(roberto)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    assert.equals(neo, mensajeria.primerEmpleado())
+    }
+
+    test "el Primer Empleado Puede Entregar(unPaquete)" {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    paquete.registrarPago()
+    assert.that(mensajeria.elPrimerEmpleadoPuedeEntregar(paquete))
+    }
+    
+}
