@@ -23,8 +23,9 @@ object roberto { //polimorfismo ->puedeLlamar() && pesoTotal()
     method puedePasarPorTodosLosDestinos(unDestino){
         return unDestino.dejaPasar(self)
     }
+
     method puedeEntregar(unPaquete){
-        return paquete.estaPago()
+        return paquete.estaPago() && self.peso() < 100
     }
 
     method puedeLlamar(){ //no puede llamar a nadie
@@ -50,7 +51,7 @@ object chuckNorris { //polimorfismo ->puedeLlamar() && pesoTotal()
         return unDestino.dejaPasar(self)
     }
     method puedeEntregar(unPaquete){
-        return paquete.estaPago()
+        return paquete.estaPago() && self.peso() == 100
     }
 
 
@@ -75,7 +76,32 @@ object neo{  //polimorfismo ->puedeLlamar() && pesoTotal()
     }
 
     method puedeEntregar(unPaquete){
-        return paquete.estaPago()
+        return paquete.estaPago() && self.peso() < 100
+    }
+
+}
+
+object micaela{
+    var peso = 70
+
+    var property destino = matrix
+
+    var property vehiculo = bicicleta
+
+    method peso(){
+        return peso
+
+    }        
+    method puedeLlamar(){
+        return not celular.tieneCreditoActualmente() // no puede llamar
+    }
+
+    method puedePasarPorTodosLosDestinos(unDestino){
+        return destino.dejaPasar(self) && vehiculo.peso() > 200
+    }
+
+    method puedeEntregar(unPaquete){
+        return paquete.estaPago() && self.peso() < 100
     }
 
 }

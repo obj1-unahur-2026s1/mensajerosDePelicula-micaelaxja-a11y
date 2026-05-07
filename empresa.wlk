@@ -5,7 +5,14 @@ import vehiculos.*
 
 object mensajeria{
 
-    const mensajeros = []
+    const property mensajeros = []
+
+    const paquetesPendientes = []
+
+    const paquetesEntregados =[]
+
+    const paquetesParaEnviar = #{}
+
     var property paquete1 = paquete
     
 
@@ -49,7 +56,7 @@ object mensajeria{
     }
 
     method pesoUltimoMensajero() {
-        return self.ultimoMensajero().pesoTotal()
+        return self.ultimoMensajero().peso()
     
     }
 
@@ -61,14 +68,15 @@ object mensajeria{
         return mensajeros.sum({m => m.peso()})
         //por cada elemento m de la lista le pido que me diga su peso total.
     }
- //Se necesita:
+ //Se necesita: 
+ //tengo que hacer los test de estos ultimos requerimientos y entregar el trabajo.
 
     method alMenosUnMensajeroPuedeEntregar(unPaquete){
     return mensajeros.any({ m => m.puedeEntregar(unPaquete)})
     }
 
     method losQuePuedenLlevar(unPaquete){
-        return mensajeros.filter({m => m.puedeEntregar(unPaquete)})
+        return mensajeros.filter({m => m.puedeEntregar(unPaquete)})//devuelve una lista
     }
 
     method tieneSobrePeso(){
@@ -80,11 +88,51 @@ object mensajeria{
         return mensajeros.size()
     }
 
-    method enviarUnPaquete(){}
+    method enviar_(unPaquete){
+        if(self.alMenosUnMensajeroPuedeEntregar(unPaquete)){
+            paquetesEntregados.add(unPaquete)
+            return true
+        }
+        else{
+            paquetesPendientes.add(unPaquete)
+            return false
+        }
+    }
+
+    method facturacionDeLaEmpresa(){
+        return self.totalGanado() 
+    }
+
+    method totalGanado(){
+        return paquetesEntregados.sum({p=> p.precio()})
+    }
+
+    method paqueteEnviado(unPaquete){
+        return paquetesEntregados.add(unPaquete)
+    }
+    
+    method enviarTodosLosPaquetes(){
+        paquetesParaEnviar.forEach({p => self.enviar_(p)})//
+        paquetesParaEnviar.clear()
+
+    }
+
+    method paquetePendienteMasCaro(){
+       return  paquetesPendientes.max({p=> p.precio()}) //me devuelve un objeto PAQUETE
+    
+    }
+
+    method enviarPaqueteMascaro(){
+        const masCaro = self.paquetePendienteMasCaro()
+
+        self.enviar_(masCaro)
+        return paquetesPendientes.remove(masCaro)
+        }
+
+    method conjuntoDePaquetesEntregados(){
+        return []
+    }
+    
+    }
 
 
-
-
-
-
-}

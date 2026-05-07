@@ -20,6 +20,51 @@ describe "Test etapa1" {
     assert.that(neo.puedePasarPorTodosLosDestinos(matrix))
     }
 }
+describe "Voy a testear al nuevo mensajero micaela ingresado y al paquete express" {
+
+    //test micaela
+
+    test "peso()" {
+    assert.equals(70, micaela.peso())
+    
+}
+    test "puedeLlamar()- false" {
+        assert.notThat(micaela.puedeLlamar())
+    }
+    test "puedePasarPorTodosLosDestinos(destino)" {
+        micaela.puedeLlamar()
+        assert.notThat(micaela.puedePasarPorTodosLosDestinos(matrix))
+    }
+
+    test " puedeEntregar(unPaquete)" {
+        paquete.puedeEntregarsePor(micaela)
+        assert.that(micaela.puedeEntregar(paquete))
+    }
+
+    //test de celular
+    test "tieneCreditoActualmente()" {
+    assert.that(celular.tieneCreditoActualmente())
+    }
+
+    //test paqueteExpress
+    test "puedeEntregarsePor(unMensajero)" {
+        assert.that(paqueteExpress.puedeEntregarsePor(neo))
+    
+    }
+
+    test "precio()"{
+        assert.equals(100, paqueteExpress.precio())
+    }
+    test "estaPago()" {
+    assert.that(paqueteExpress.estaPago())
+    }
+
+    test "peso(nuevoPeso)" {
+    assert.equals(20, paqueteExpress.peso(20))
+    }
+
+
+}
 
 
 

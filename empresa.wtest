@@ -12,11 +12,12 @@ describe "Voy a tester individualmente los metodos del objeto MENSAJERIA" {
     }
 
     test "Despedir a un mensajero"{
-    mensajeria.despedirATodos()
+    mensajeria.despedirATodos() //Despedir a todos los mensajeros
     mensajeria.contratarUnMensajero(neo)
     mensajeria.despedirUnMensajero(neo)
     assert.equals(0, mensajeria.obtenerMensajeros().size())
     }
+
     test "esGrande()" {
     mensajeria.despedirATodos()
     mensajeria.contratarUnMensajero(neo)
@@ -41,4 +42,84 @@ describe "Voy a tester individualmente los metodos del objeto MENSAJERIA" {
     assert.that(mensajeria.elPrimerEmpleadoPuedeEntregar(paquete))
     }
     
+    test "Saber el peso del último mensajero de la empresa." {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    mensajeria.contratarUnMensajero(roberto)
+    assert.equals(95, mensajeria.pesoUltimoMensajero()) //90 + 5 de la bicicleta
+    }
+
 }
+//Se necesita:
+describe "Voy a hacer la segunda parte de testeos de la empresa y el objeto mensajeria" {
+    test "si al menos uno de sus mensajeros puede entregar el paquete." {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    mensajeria.contratarUnMensajero(roberto)
+    assert.that(mensajeria.alMenosUnMensajeroPuedeEntregar(paquete))
+    }
+
+    test "Obtener todos los mensajeros que pueden llevar un paquete dado." {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    mensajeria.contratarUnMensajero(roberto)
+    assert.equals([neo, roberto], mensajeria.losQuePuedenLlevar(paquete))
+    }
+
+    test "Saber si una mensajería tiene sobrepeso. Esto sucede si el promedio del peso de los mensajeros es superior a 500 Kg."{
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    mensajeria.contratarUnMensajero(roberto)
+    assert.notThat(mensajeria.tieneSobrePeso())
+    }
+
+    test "Hacer que la empresa de mensajería envíe un paquete. " {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    mensajeria.contratarUnMensajero(roberto)
+    assert.that(mensajeria.enviar_(paquete))
+    }
+
+    test "cantidadDeMensajeros()" {
+    mensajeria.despedirATodos()
+    mensajeria.contratarUnMensajero(neo)
+    mensajeria.contratarUnMensajero(chuckNorris)
+    mensajeria.contratarUnMensajero(roberto)
+    assert.equals(3,mensajeria.cantidadDeMensajeros())  
+    }
+
+    test "Conocer la facturación de la empresa, que es el total ganado por los paquetes enviados." {
+    mensajeria.paqueteEnviado(paquete)
+    mensajeria.paqueteEnviado(paquete)
+    mensajeria.paqueteEnviado(paquete)
+    assert.equals(150, mensajeria.facturacionDeLaEmpresa())
+    }
+
+    test "totalGanado()" {
+    mensajeria.paqueteEnviado(paquete)
+    assert.equals(50,mensajeria.totalGanado())
+    }
+
+    test "enviarTodosLosPaquetes(): Dado un conjunto de paquetes, enviarlos a todos." {
+    mensajeria.enviarTodosLosPaquetes()
+    assert.equals([], mensajeria.conjuntoDePaquetesEntregados())
+    }
+
+    test "Encontrar el paquete pendiente más caro. "{
+        mensajeria.enviar_(paquete)
+        assert.equals(paquete, mensajeria.paquetePendienteMasCaro())
+
+    }
+    test "enviarPaqueteMascaro() , " {
+        mensajeria.enviar_(paquete)
+        mensajeria.paquetePendienteMasCaro()
+        assert.equals([paquete], mensajeria.enviarPaqueteMascaro())// ver
+    }
+
+}
+

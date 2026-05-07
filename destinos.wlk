@@ -6,7 +6,7 @@ import empresa.*
 
 //Puente de Brooklyn: deja pasar a todo lo que pese hasta una tonelada.
 object puenteDeBrooklyn{
-    
+
         method dejaPasar(unMensajero){
             return unMensajero.peso() <= 1000
         }
@@ -15,11 +15,9 @@ object puenteDeBrooklyn{
 object  matrix {
 
     method dejaPasar(unMensajero) {
-        if(unMensajero.puedeLlamar()){
-            return
-        }
-        else{
-            return false
-        }
+        return unMensajero.puedeLlamar()
+        
+        } 
     }
-}
+
+        
